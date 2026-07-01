@@ -1,0 +1,1564 @@
+/* ===========================
+Football AI PRO V3
+=========================== */
+
+*{
+
+margin:0;
+padding:0;
+box-sizing:border-box;
+
+}
+
+body{
+
+background:#0f172a;
+
+font-family:'Inter',sans-serif;
+
+color:white;
+
+overflow-x:hidden;
+
+}
+
+.page{
+
+width:95%;
+
+max-width:1700px;
+
+margin:auto;
+
+padding:30px;
+
+}
+
+/* ===========================
+HEADER
+=========================== */
+
+.topHeader{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+margin-bottom:35px;
+
+padding:25px;
+
+background:#1e293b;
+
+border-radius:22px;
+
+box-shadow:0 12px 35px rgba(0,0,0,.35);
+
+}
+
+.logoArea{
+
+display:flex;
+
+align-items:center;
+
+gap:20px;
+
+}
+
+.logoCircle{
+
+width:70px;
+
+height:70px;
+
+border-radius:50%;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:34px;
+
+background:linear-gradient(135deg,#2563eb,#38bdf8);
+
+box-shadow:0 0 30px rgba(56,189,248,.4);
+
+}
+
+.logoArea h1{
+
+font-size:34px;
+
+font-weight:800;
+
+background:linear-gradient(90deg,#60a5fa,#22d3ee,#34d399);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+}
+
+.logoArea p{
+
+margin-top:6px;
+
+font-size:15px;
+
+color:#94a3b8;
+
+}
+
+.menu{
+
+display:flex;
+
+gap:18px;
+
+}
+
+.menu a{
+
+text-decoration:none;
+
+padding:12px 18px;
+
+border-radius:12px;
+
+color:#cbd5e1;
+
+transition:.25s;
+
+font-weight:600;
+
+}
+
+.menu a:hover{
+
+background:#334155;
+
+color:white;
+
+}
+
+.menu .active{
+
+background:#2563eb;
+
+color:white;
+
+}
+
+/* ===========================
+STATS
+=========================== */
+
+.statsGrid{
+
+display:grid;
+
+grid-template-columns:repeat(6,1fr);
+
+gap:18px;
+
+margin-bottom:35px;
+
+}
+
+.statCard{
+
+background:#1e293b;
+
+border-radius:18px;
+
+padding:25px;
+
+text-align:center;
+
+box-shadow:0 10px 25px rgba(0,0,0,.35);
+
+transition:.3s;
+
+}
+
+.statCard:hover{
+
+transform:translateY(-6px);
+
+}
+
+.statTitle{
+
+font-size:14px;
+
+color:#94a3b8;
+
+margin-bottom:12px;
+
+}
+
+.statValue{
+
+font-size:34px;
+
+font-weight:800;
+
+}
+
+/* ===========================
+CHART
+=========================== */
+
+.chartCard{
+
+background:#1e293b;
+
+border-radius:22px;
+
+padding:30px;
+
+margin-bottom:35px;
+
+box-shadow:0 12px 35px rgba(0,0,0,.35);
+
+}
+
+.cardTitle{
+
+font-size:22px;
+
+font-weight:700;
+
+margin-bottom:20px;
+
+}
+
+#historyChart{
+
+max-height:330px;
+
+}
+/* ===========================
+TOOLBAR
+=========================== */
+
+.toolbar{
+
+display:flex;
+
+gap:18px;
+
+margin-bottom:35px;
+
+align-items:center;
+
+}
+
+.toolbar input{
+
+flex:1;
+
+background:#1e293b;
+
+border:none;
+
+padding:18px;
+
+border-radius:16px;
+
+font-size:15px;
+
+color:white;
+
+outline:none;
+
+box-shadow:0 8px 25px rgba(0,0,0,.25);
+
+}
+
+.toolbar input::placeholder{
+
+color:#94a3b8;
+
+}
+
+.toolbar select{
+
+width:220px;
+
+background:#1e293b;
+
+border:none;
+
+padding:18px;
+
+border-radius:16px;
+
+color:white;
+
+font-size:15px;
+
+outline:none;
+
+box-shadow:0 8px 25px rgba(0,0,0,.25);
+
+}
+
+#clearBtn{
+
+background:#ef4444;
+
+border:none;
+
+padding:18px 24px;
+
+border-radius:16px;
+
+font-weight:bold;
+
+color:white;
+
+cursor:pointer;
+
+transition:.25s;
+
+box-shadow:0 8px 20px rgba(239,68,68,.25);
+
+}
+
+#clearBtn:hover{
+
+transform:translateY(-3px);
+
+background:#dc2626;
+
+}
+
+
+/* ===========================
+GRID
+=========================== */
+
+.historyGrid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fill,minmax(520px,1fr));
+
+gap:28px;
+
+}
+
+
+/* ===========================
+CARD
+=========================== */
+
+.historyCard{
+
+background:#1e293b;
+
+border-radius:24px;
+
+padding:28px;
+
+position:relative;
+
+overflow:hidden;
+
+box-shadow:0 15px 35px rgba(0,0,0,.35);
+
+transition:.35s;
+
+}
+
+.historyCard:hover{
+
+transform:translateY(-8px);
+
+box-shadow:0 25px 50px rgba(0,0,0,.45);
+
+}
+
+
+/* เส้นซ้าย */
+
+.historyCard::before{
+
+content:"";
+
+position:absolute;
+
+left:0;
+
+top:0;
+
+width:8px;
+
+height:100%;
+
+background:#22c55e;
+
+}
+
+.historyCard.pending::before{
+
+background:#f59e0b;
+
+}
+
+.historyCard.lose::before{
+
+background:#ef4444;
+
+}
+
+
+/* ===========================
+MATCH TITLE
+=========================== */
+
+.matchTitle{
+
+font-size:28px;
+
+font-weight:800;
+
+line-height:1.4;
+
+margin-bottom:22px;
+
+}
+
+
+/* ===========================
+BADGES
+=========================== */
+
+.badges{
+
+display:flex;
+
+gap:10px;
+
+flex-wrap:wrap;
+
+margin-bottom:22px;
+
+}
+
+.badge{
+
+padding:8px 14px;
+
+border-radius:12px;
+
+background:#334155;
+
+font-size:13px;
+
+font-weight:700;
+
+color:white;
+
+}
+
+
+/* ===========================
+STATUS
+=========================== */
+
+.status{
+
+display:inline-block;
+
+padding:8px 18px;
+
+border-radius:40px;
+
+font-size:13px;
+
+font-weight:700;
+
+margin-bottom:20px;
+
+}
+
+.pending{
+
+background:#ca8a04;
+
+color:white;
+
+}
+
+.win{
+
+background:#16a34a;
+
+color:white;
+
+}
+
+.lose{
+
+background:#dc2626;
+
+color:white;
+
+}
+
+
+/* ===========================
+PROGRESS
+=========================== */
+
+.progress{
+
+margin-top:18px;
+
+width:100%;
+
+height:16px;
+
+background:#334155;
+
+border-radius:20px;
+
+overflow:hidden;
+
+}
+
+.progress div{
+
+height:100%;
+
+background:linear-gradient(90deg,#22c55e,#4ade80);
+
+animation:progressMove 1.2s ease;
+
+}
+
+@keyframes progressMove{
+
+from{
+
+width:0;
+
+}
+
+}
+
+
+/* ===========================
+ANALYSIS
+=========================== */
+
+.analysisBox{
+
+margin-top:22px;
+
+background:#111827;
+
+padding:18px;
+
+border-radius:14px;
+
+font-size:14px;
+
+line-height:1.9;
+
+color:#d1d5db;
+
+max-height:220px;
+
+overflow:auto;
+
+}
+
+.analysisBox::-webkit-scrollbar{
+
+width:6px;
+
+}
+
+.analysisBox::-webkit-scrollbar-thumb{
+
+background:#374151;
+
+border-radius:20px;
+
+}
+
+
+/* ===========================
+ACTION
+=========================== */
+
+.actionBar{
+
+display:flex;
+
+gap:14px;
+
+margin-top:24px;
+
+}
+
+.actionBar button{
+
+flex:1;
+
+border:none;
+
+padding:15px;
+
+border-radius:14px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.25s;
+
+font-size:15px;
+
+}
+
+.checkBtn{
+
+background:#2563eb;
+
+color:white;
+
+}
+
+.checkBtn:hover{
+
+background:#1d4ed8;
+
+transform:translateY(-2px);
+
+}
+
+.deleteBtn{
+
+background:#ef4444;
+
+color:white;
+
+}
+
+.deleteBtn:hover{
+
+background:#dc2626;
+
+transform:translateY(-2px);
+
+}
+/* =========================================
+   PREMIUM AI PANEL
+========================================= */
+
+.aiPanel{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:16px;
+
+margin-top:22px;
+
+}
+
+.aiBox{
+
+background:#111827;
+
+border-radius:16px;
+
+padding:18px;
+
+border:1px solid rgba(255,255,255,.05);
+
+transition:.25s;
+
+}
+
+.aiBox:hover{
+
+transform:translateY(-3px);
+
+background:#172036;
+
+}
+
+.aiTitle{
+
+font-size:13px;
+
+color:#94a3b8;
+
+margin-bottom:10px;
+
+}
+
+.aiValue{
+
+font-size:24px;
+
+font-weight:700;
+
+}
+
+
+/* =========================================
+   MAIN BET
+========================================= */
+
+.mainBet{
+
+margin-top:22px;
+
+padding:20px;
+
+border-radius:18px;
+
+background:linear-gradient(135deg,#2563eb,#0ea5e9);
+
+box-shadow:0 10px 25px rgba(37,99,235,.35);
+
+}
+
+.mainBetTitle{
+
+font-size:13px;
+
+opacity:.85;
+
+margin-bottom:8px;
+
+}
+
+.mainBetValue{
+
+font-size:28px;
+
+font-weight:800;
+
+}
+
+
+/* =========================================
+   STARS
+========================================= */
+
+.starBox{
+
+margin-top:18px;
+
+font-size:28px;
+
+letter-spacing:4px;
+
+color:#facc15;
+
+text-shadow:
+
+0 0 10px rgba(250,204,21,.4);
+
+}
+
+
+/* =========================================
+   DATE
+========================================= */
+
+.matchDate{
+
+margin-top:18px;
+
+font-size:13px;
+
+color:#94a3b8;
+
+}
+
+
+/* =========================================
+   RECOMMEND
+========================================= */
+
+.recommend{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:10px;
+
+padding:10px 18px;
+
+border-radius:30px;
+
+font-weight:700;
+
+margin-top:18px;
+
+}
+
+.recBET{
+
+background:#16a34a;
+
+box-shadow:0 0 20px rgba(34,197,94,.3);
+
+}
+
+.recSMALL{
+
+background:#ca8a04;
+
+box-shadow:0 0 20px rgba(250,204,21,.3);
+
+}
+
+.recWAIT{
+
+background:#dc2626;
+
+box-shadow:0 0 20px rgba(239,68,68,.3);
+
+}
+
+
+/* =========================================
+   HOVER GLOW
+========================================= */
+
+.historyCard:hover{
+
+box-shadow:
+
+0 20px 50px rgba(0,0,0,.45),
+
+0 0 30px rgba(59,130,246,.25);
+
+}
+
+
+/* =========================================
+   SCROLLBAR
+========================================= */
+
+::-webkit-scrollbar{
+
+width:10px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:#111827;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+background:#334155;
+
+border-radius:20px;
+
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+background:#475569;
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:1200px){
+
+.statsGrid{
+
+grid-template-columns:repeat(3,1fr);
+
+}
+
+}
+
+@media(max-width:900px){
+
+.historyGrid{
+
+grid-template-columns:1fr;
+
+}
+
+.aiPanel{
+
+grid-template-columns:1fr;
+
+}
+
+.toolbar{
+
+flex-direction:column;
+
+}
+
+.toolbar input{
+
+width:100%;
+
+}
+
+.toolbar select{
+
+width:100%;
+
+}
+
+#clearBtn{
+
+width:100%;
+
+}
+
+}
+
+@media(max-width:700px){
+
+.topHeader{
+
+flex-direction:column;
+
+gap:20px;
+
+text-align:center;
+
+}
+
+.menu{
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+.statsGrid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.logoArea{
+
+justify-content:center;
+
+}
+
+.matchTitle{
+
+font-size:22px;
+
+}
+
+.mainBetValue{
+
+font-size:22px;
+
+}
+
+}
+
+@media(max-width:500px){
+
+.page{
+
+padding:15px;
+
+}
+
+.statsGrid{
+
+grid-template-columns:1fr;
+
+}
+
+.historyCard{
+
+padding:20px;
+
+}
+
+.actionBar{
+
+flex-direction:column;
+
+}
+
+.actionBar button{
+
+width:100%;
+
+}
+
+}
+/* ===================================================
+   PREMIUM BACKGROUND
+=================================================== */
+
+body{
+
+background:
+radial-gradient(circle at top left,#2563eb22,transparent 35%),
+radial-gradient(circle at top right,#06b6d422,transparent 30%),
+radial-gradient(circle at bottom,#22c55e22,transparent 30%),
+#0f172a;
+
+background-attachment:fixed;
+
+}
+
+
+
+/* ===================================================
+   GLASS EFFECT
+=================================================== */
+
+.historyCard{
+
+backdrop-filter:blur(14px);
+
+-webkit-backdrop-filter:blur(14px);
+
+background:
+
+linear-gradient(
+
+180deg,
+
+rgba(30,41,59,.92),
+
+rgba(15,23,42,.96)
+
+);
+
+}
+
+
+
+/* ===================================================
+   TOP SHINE
+=================================================== */
+
+.historyCard::after{
+
+content:"";
+
+position:absolute;
+
+left:-40%;
+
+top:-120%;
+
+width:120%;
+
+height:300%;
+
+background:
+
+linear-gradient(
+
+120deg,
+
+transparent,
+
+rgba(255,255,255,.05),
+
+transparent
+
+);
+
+transform:rotate(25deg);
+
+transition:.8s;
+
+pointer-events:none;
+
+}
+
+.historyCard:hover::after{
+
+left:120%;
+
+}
+
+
+
+/* ===================================================
+   MATCH TITLE
+=================================================== */
+
+.matchTitle{
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+gap:14px;
+
+font-size:30px;
+
+font-weight:800;
+
+text-align:center;
+
+}
+
+
+
+/* ===================================================
+   VS
+=================================================== */
+
+.matchTitle::before{
+
+content:"⚽";
+
+font-size:24px;
+
+}
+
+
+
+/* ===================================================
+   BADGE
+=================================================== */
+
+.badge{
+
+background:
+
+linear-gradient(
+
+90deg,
+
+#334155,
+
+#475569
+
+);
+
+border:1px solid rgba(255,255,255,.05);
+
+}
+
+
+
+/* ===================================================
+   BET COLOR
+=================================================== */
+
+.badge:nth-child(1){
+
+background:
+
+linear-gradient(
+
+90deg,
+
+#2563eb,
+
+#38bdf8
+
+);
+
+}
+
+.badge:nth-child(2){
+
+background:
+
+linear-gradient(
+
+90deg,
+
+#16a34a,
+
+#22c55e
+
+);
+
+}
+
+.badge:nth-child(3){
+
+background:
+
+linear-gradient(
+
+90deg,
+
+#f59e0b,
+
+#facc15
+
+);
+
+color:#111;
+
+}
+
+
+
+/* ===================================================
+   PROGRESS PREMIUM
+=================================================== */
+
+.progress{
+
+height:20px;
+
+box-shadow:
+
+inset 0 0 10px rgba(0,0,0,.4);
+
+}
+
+.progress div{
+
+background:
+
+linear-gradient(
+
+90deg,
+
+#22c55e,
+
+#4ade80,
+
+#86efac
+
+);
+
+box-shadow:
+
+0 0 15px rgba(34,197,94,.45);
+
+}
+
+
+
+/* ===================================================
+   ANALYSIS
+=================================================== */
+
+.analysisBox{
+
+font-size:15px;
+
+line-height:2;
+
+}
+
+
+
+/* ===================================================
+   BUTTON
+=================================================== */
+
+.actionBar button{
+
+font-size:15px;
+
+letter-spacing:.5px;
+
+}
+
+.checkBtn{
+
+background:
+
+linear-gradient(
+
+90deg,
+
+#2563eb,
+
+#38bdf8
+
+);
+
+}
+
+.deleteBtn{
+
+background:
+
+linear-gradient(
+
+90deg,
+
+#dc2626,
+
+#ef4444
+
+);
+
+}
+
+
+
+/* ===================================================
+   FLOAT
+=================================================== */
+
+.historyCard{
+
+animation:
+
+cardFloat 6s ease infinite;
+
+}
+
+@keyframes cardFloat{
+
+0%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-4px);
+
+}
+
+100%{
+
+transform:translateY(0);
+
+}
+
+}
+
+
+
+/* ===================================================
+   TITLE
+=================================================== */
+
+.header h1{
+
+font-size:42px;
+
+font-weight:900;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+#38bdf8,
+
+#2563eb,
+
+#22c55e
+
+);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+}
+
+
+
+/* ===================================================
+   STATS
+=================================================== */
+
+.statCard{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.statCard::before{
+
+content:"";
+
+position:absolute;
+
+left:0;
+
+bottom:0;
+
+width:100%;
+
+height:4px;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+#38bdf8,
+
+#22c55e
+
+);
+
+}
+
+
+
+/* ===================================================
+   STATS HOVER
+=================================================== */
+
+.statCard:hover{
+
+transform:
+
+translateY(-6px)
+
+scale(1.03);
+
+}
+
+
+
+/* ===================================================
+   TOOLBAR
+=================================================== */
+
+.toolbar input:focus{
+
+box-shadow:
+
+0 0 25px rgba(59,130,246,.35);
+
+}
+
+.toolbar select:focus{
+
+box-shadow:
+
+0 0 25px rgba(59,130,246,.35);
+
+}
+
+
+.analysisBtn{
+
+    background:#2563eb;
+
+    color:white;
+
+    border:none;
+
+    padding:8px 14px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+}
+
+.analysisBtn:hover{
+
+    background:#1d4ed8;
+
+}
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,.8);
+
+    z-index:9999;
+
+}
+
+.modal-content{
+
+    width:900px;
+
+    max-width:95%;
+
+    margin:40px auto;
+
+    background:#111827;
+
+    border-radius:15px;
+
+    padding:25px;
+
+    color:white;
+
+}
+
+.close{
+
+    float:right;
+
+    font-size:30px;
+
+    cursor:pointer;
+
+}
+
+.tabBar{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:20px;
+
+}
+
+.tabBar button{
+
+    padding:10px 18px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}

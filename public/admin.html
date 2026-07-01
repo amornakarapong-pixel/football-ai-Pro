@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Football AI PRO - Admin</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* style เดิมทั้งหมด */
+
+</style>
+
+</head>
+
+<body>
+
+<button
+class="logoutBtn"
+onclick="logout()">
+
+Logout
+
+</button>
+
+<h1>
+⚙️ ADMIN PANEL
+</h1>
+
+<div class="card">
+
+<h2>เพิ่มสมาชิก</h2>
+
+<input id="username" placeholder="Username">
+
+<input id="password" placeholder="Password">
+
+<select id="role">
+
+<option value="member">Member</option>
+
+<option value="admin">Admin</option>
+
+</select>
+
+<input type="datetime-local" id="expire">
+
+<button
+class="addBtn"
+onclick="createUser()">
+
+สร้างสมาชิก
+
+</button>
+
+</div>
+
+<div class="card">
+
+<h2>สมาชิกทั้งหมด</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Username</th>
+
+<th>Role</th>
+
+<th>Expire</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="userTable"></tbody>
+
+</table>
+
+</div>
+
+<script src="auth.js"></script>
+<script src="admin.js"></script>
+
+<script>
+checkLogin();
+</script>
+
+</body>
+</html>

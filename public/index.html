@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+
+<title>
+Football AI PRO
+</title>
+
+
+<link rel="stylesheet" href="style.css">
+
+<button id="logoutBtn">🚪 Logout</button>
+
+</head>
+
+
+
+<!-- ===================== -->
+<!-- AI POPUP -->
+<!-- ===================== -->
+
+<div id="aiModal" class="modal">
+
+  <div class="modal-content">
+
+    <span id="closeModal" class="close-btn">
+      ✖
+    </span>
+
+    <div class="modal-tabs">
+
+<button
+onclick="showTab('tip')"
+>
+
+🎯 ทีเด็ด
+</button>
+
+
+<button
+onclick="showTab('analysis')"
+>
+📋 วิเคราะห์
+</button>
+
+<button
+onclick="showTab('odds')"
+>
+📊 ราคา
+</button>
+
+</div>
+
+<div id="modalBody"></div>
+
+  </div>
+
+</div>
+
+
+
+<div class="header">
+  
+<div class="topMenu">
+
+<a href="/history.html" class="historyBtn">
+📚 AI History
+</a>
+
+</div>
+
+<h1>⚽ Football AI PRO</h1>
+
+
+
+<div id="status">
+
+SYSTEM LOADING...
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="layout">
+
+
+
+<!-- ลีก -->
+
+<div class="panel">
+
+
+<h2>
+🏆 LEAGUES
+</h2>
+
+
+<div id="leagueList">
+
+กำลังโหลดลีก...
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<!-- คู่บอล -->
+
+<div class="panel">
+
+
+<h2>
+🔥 MATCHES
+</h2>
+
+
+<div id="matchList">
+
+เลือกลีก
+
+</div>
+
+<h1>🤖 AI ANALYSIS</h1>
+
+<div id="analysisBox">
+
+รอวิเคราะห์...
+
+</div>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+<script src="app.js"></script>
+
+<script src="auth.js"></script>
+
+<script>
+checkLogin();
+</script>
+
+<body>
+
+
+</body>
+
+
+</html>
